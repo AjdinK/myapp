@@ -104,13 +104,28 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       child: const Center(
-                          child: Text(
-                        'Login',
+                        child: Text(
+                          'Login',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'FiraMono',
+                              fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                                  color: Color.fromARGB(255, 164, 197, 255)))),
+                      child: const Text(
+                        'Forget password ?',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'FiraMono',
-                            fontSize: 20),
-                      )),
+                            fontFamily: 'FiraMono', color: Colors.black87),
+                      ),
                     )
                   ],
                 ),
