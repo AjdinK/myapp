@@ -126,7 +126,10 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(
                             fontFamily: 'FiraMono', color: Colors.black87),
                       ),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
                   ],
                 ),
               ),
