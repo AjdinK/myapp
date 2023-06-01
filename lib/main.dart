@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/screens/products/product_list_screen.dart';
 
 void main() => runApp(
       MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const HomePage(),
+        onGenerateRoute: (settings) {
+          if (settings.name == ProductListScreen.routeName) {
+            return MaterialPageRoute(
+                builder: ((context) => const ProductListScreen()));
+          }
+        },
         theme: ThemeData(useMaterial3: true),
       ),
     );
@@ -103,13 +110,19 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'FiraMono',
-                              fontSize: 20),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, ProductListScreen.routeName);
+                        },
+                        child: Center(
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'FiraMono',
+                                fontSize: 20),
+                          ),
                         ),
                       ),
                     ),
