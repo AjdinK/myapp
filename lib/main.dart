@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(
       MaterialApp(
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: false,
         home: const HomePage(),
         theme: ThemeData(useMaterial3: true),
       ),
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('eProdaja')),
+        title: const Center(child: Text('test_app')),
       ),
       body: SingleChildScrollView(
         child: Column(
