@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/screens/products/product_list_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() => runApp(
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: const HomePage(),
-        onGenerateRoute: (settings) {
-          if (settings.name == ProductListScreen.routeName) {
-            return MaterialPageRoute(
-                builder: ((context) => const ProductListScreen()));
-          }
-        },
-        theme: ThemeData(useMaterial3: true),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => ProductProvider(),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: const HomePage(),
+          onGenerateRoute: (settings) {
+            if (settings.name == ProductListScreen.routeName) {
+              return MaterialPageRoute(
+                  builder: ((context) => const ProductListScreen()));
+            }
+            return null;
+          },
+          theme: ThemeData(useMaterial3: true),
+        ),
       ),
     );
 
@@ -60,7 +70,7 @@ class HomePage extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    color: Color.fromARGB(115, 247, 247, 247)),
+                    color: const Color.fromARGB(115, 247, 247, 247)),
                 child: Column(
                   children: [
                     Container(
@@ -115,7 +125,7 @@ class HomePage extends StatelessWidget {
                           Navigator.pushNamed(
                               context, ProductListScreen.routeName);
                         },
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Login',
                             style: TextStyle(
