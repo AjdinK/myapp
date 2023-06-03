@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/providers/product_provider.dart';
+import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
 class ProductListScreen extends StatefulWidget {
@@ -37,10 +38,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            // color: Colors.redAccent,
             child: Column(
               children: [
+                const SizedBox(
+                  height: 30,
+                ),
+                _buildHeader(),
+                const SizedBox(
+                  height: 50,
+                ),
                 Container(
-                  height: 100,
+                  height: 150,
                   child: GridView(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -60,6 +69,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 
+  Widget _buildHeader() {
+    return Container(
+      child: const Text(
+        "Products",
+        style: TextStyle(
+            fontFamily: 'FiraMono',
+            color: Colors.blueAccent,
+            fontSize: 40,
+            fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
   List<Widget> _buildProductCardList() {
     if (data.length == 0) {
       return [const Text("Loading ....")];
@@ -67,10 +89,28 @@ class _ProductListScreenState extends State<ProductListScreen> {
     List<Widget> list = data
         .map(
           (x) => Container(
-            width: 100,
-            height: 100,
-            color: Colors.redAccent,
-            child: Text(x['naziv'] ?? "NULL"),
+            width: 200,
+            height: 200,
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  child: imageFromBase64String(x['slika']),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  x['naziv'] ?? "NULL",
+                  style: const TextStyle(
+                      fontFamily: 'FiraMono',
+                      fontSize: 11,
+                      color: Colors.black87),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           ),
         )
         .cast<Widget>()
