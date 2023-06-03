@@ -12,7 +12,7 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
-  String data = "";
+  dynamic data = {};
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(data),
+        child: Text(data!.length.toString()),
       ),
     );
   }
