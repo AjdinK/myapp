@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
+import 'package:myapp/model/product.dart';
 
 class ProductProvider with ChangeNotifier {
   HttpClient client = new HttpClient();
@@ -12,7 +13,7 @@ class ProductProvider with ChangeNotifier {
     client.badCertificateCallback = (cert, host, port) => true;
     http = IOClient(client);
   }
-  Future<dynamic> get(dynamic searchObject) async {
+  Future<List<Product>> get(dynamic searchObject) async {
     var url = Uri.parse("https://10.0.2.2:7289/Proizvodi");
     var username = 'test';
     var password = 'test';
@@ -28,7 +29,9 @@ class ProductProvider with ChangeNotifier {
 
     if (response.statusCode < 400) {
       var data = jsonDecode(response.body);
-      return data;
+      List<Product> list =
+          data.map((x) => Product.fromJson(x)).cast<Product>().toList();
+      return list;
     } else {
       throw Exception('User not allowed');
     }

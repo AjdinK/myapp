@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/model/product.dart';
 import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
-  dynamic data = {};
+  List<Product> data = [];
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     var tmpData = await _productProvider?.get(null);
     setState(
       () {
-        data = tmpData;
+        data = tmpData! as List<Product>;
       },
     );
   }
@@ -96,13 +97,13 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 Container(
                   height: 100,
                   width: 100,
-                  child: imageFromBase64String(x['slika']),
+                  child: imageFromBase64String(x.slika!),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
                 Text(
-                  x['naziv'] ?? "NULL",
+                  x.naziv ?? "NULL",
                   style: const TextStyle(
                       fontFamily: 'FiraMono',
                       fontSize: 11,
