@@ -34,9 +34,48 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(data!.length.toString()),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  child: GridView(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            childAspectRatio: 3 / 4,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 30),
+                    scrollDirection: Axis.horizontal,
+                    children: _buildProductCardList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  List<Widget> _buildProductCardList() {
+    if (data.length == 0) {
+      return [const Text("Loading ....")];
+    }
+    List<Widget> list = data
+        .map(
+          (x) => Container(
+            width: 100,
+            height: 100,
+            color: Colors.redAccent,
+            child: Text(x['naziv'] ?? "NULL"),
+          ),
+        )
+        .cast<Widget>()
+        .toList();
+
+    return list;
   }
 }
