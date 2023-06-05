@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:myapp/model/product.dart';
 import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/utils/util.dart';
@@ -13,6 +14,7 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
+  var f = NumberFormat("###.0#");
   ProductProvider? _productProvider = null;
   List<Product> data = [];
 
@@ -108,6 +110,16 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       fontFamily: 'FiraMono',
                       fontSize: 11,
                       color: Colors.black87),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  f.format(
+                    x.cijena ?? "0",
+                  ),
+                  style: const TextStyle(
+                      fontFamily: 'FiraMono',
+                      fontSize: 14,
+                      color: Colors.blueAccent),
                   overflow: TextOverflow.ellipsis,
                 ),
               ],
