@@ -47,8 +47,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   height: 30,
                 ),
                 _buildHeader(),
+                _buildProductSearch(),
                 const SizedBox(
-                  height: 50,
+                  height: 10,
                 ),
                 Container(
                   height: 150,
@@ -80,6 +81,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
             color: Colors.blueAccent,
             fontSize: 40,
             fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _buildProductSearch() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: "Search",
+          prefixIcon: Icon(Icons.search_outlined),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
       ),
     );
   }
