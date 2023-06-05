@@ -25,7 +25,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   Future loadData() async {
-    var tmpData = await _productProvider?.get(null);
+    var tmpData = await _productProvider?.get();
     setState(
       () {
         data = tmpData! as List<Product>;

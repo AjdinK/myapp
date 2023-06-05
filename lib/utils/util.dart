@@ -3,6 +3,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+class Authorization {
+  static String? username;
+  static String? password;
+}
+
 Image imageFromBase64String(String base64String) {
   return Image.memory(base64Decode(base64String));
 }

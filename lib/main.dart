@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/providers/product_provider.dart';
+import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/products/product_list_screen.dart';
+import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(
@@ -9,10 +11,13 @@ void main() => runApp(
           ChangeNotifierProvider(
             create: (_) => ProductProvider(),
           ),
+          ChangeNotifierProvider(
+            create: (_) => UserProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const HomePage(),
+          home: HomePage(),
           onGenerateRoute: (settings) {
             if (settings.name == ProductListScreen.routeName) {
               return MaterialPageRoute(
@@ -26,10 +31,15 @@ void main() => runApp(
     );
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  TextEditingController _usernameController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
+  late UserProvider _userProvider;
 
   @override
   Widget build(BuildContext context) {
+    _userProvider = Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('test_app')),
@@ -79,10 +89,11 @@ class HomePage extends StatelessWidget {
                           bottom: BorderSide(color: Colors.grey),
                         ),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(15),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: _usernameController,
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Enter your Email or Phone',
                             hintStyle: TextStyle(
@@ -92,10 +103,11 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: const Padding(
-                        padding: EdgeInsets.all(15),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
                         child: TextField(
-                          decoration: InputDecoration(
+                          controller: _passwordController,
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Enter Password',
                             hintStyle: TextStyle(
@@ -121,7 +133,10 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          Authorization.username = _usernameController.text;
+                          Authorization.password = _passwordController.text;
+                          await _userProvider.get();
                           Navigator.pushNamed(
                               context, ProductListScreen.routeName);
                         },
