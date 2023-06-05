@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
 import 'package:http/src/response.dart';
+import 'package:myapp/utils/util.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
@@ -11,9 +12,9 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
   HttpClient client = new HttpClient();
   IOClient? http;
-
+//'https://localhost:7289/Korisnici'
   BaseProvider(String endpoint) {
-    _baseUrl = 'https//10.0.2.2:7289/';
+    _baseUrl = 'https://10.0.2.2:7289';
     print("baseurl: $_baseUrl");
 
     if (_baseUrl!.endsWith('/') == false) {
@@ -77,8 +78,8 @@ abstract class BaseProvider<T> with ChangeNotifier {
   }
 
   Map<String, String> createHeaders() {
-    String? username = "";
-    String? password = "";
+    String? username = Authorization.username;
+    String? password = Authorization.password;
     String basicAuth =
         "Basic ${base64Encode(utf8.encode('$username:$password'))}";
     var headers = {

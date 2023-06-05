@@ -138,15 +138,16 @@ class HomePage extends StatelessWidget {
                             Authorization.username = _usernameController.text;
                             Authorization.password = _passwordController.text;
                             await _userProvider.get();
+
                             Navigator.pushNamed(
                                 context, ProductListScreen.routeName);
                           } catch (e) {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) => AlertDialog(
-                                title: Text("Error"),
-                                content: Text(
-                                  e.toString(),
+                                title: const Text("Error"),
+                                content: const Text(
+                                  "Incorrect username or password ",
                                 ),
                                 actions: [
                                   TextButton(
