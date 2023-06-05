@@ -134,11 +134,29 @@ class HomePage extends StatelessWidget {
                       ),
                       child: InkWell(
                         onTap: () async {
-                          Authorization.username = _usernameController.text;
-                          Authorization.password = _passwordController.text;
-                          await _userProvider.get();
-                          Navigator.pushNamed(
-                              context, ProductListScreen.routeName);
+                          try {
+                            Authorization.username = _usernameController.text;
+                            Authorization.password = _passwordController.text;
+                            await _userProvider.get();
+                            Navigator.pushNamed(
+                                context, ProductListScreen.routeName);
+                          } catch (e) {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: Text("Error"),
+                                content: Text(
+                                  e.toString(),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ),
+                            );
+                          }
                         },
                         child: const Center(
                           child: Text(
