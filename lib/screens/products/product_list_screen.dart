@@ -14,7 +14,6 @@ class ProductListScreen extends StatefulWidget {
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-  var f = NumberFormat("###.0#");
   ProductProvider? _productProvider = null;
   List<Product> data = [];
 
@@ -113,7 +112,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  f.format(
+                  formatNumber(
                     x.cijena ?? "0",
                   ),
                   style: const TextStyle(
