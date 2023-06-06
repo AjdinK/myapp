@@ -25,7 +25,13 @@ void main() => runApp(
             }
             return null;
           },
-          theme: ThemeData(useMaterial3: true),
+          theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: 'firaMono',
+            colorSchemeSeed: Colors.amberAccent,
+          ),
+          darkTheme: ThemeData.dark(),
+          themeMode: ThemeMode.system,
         ),
       ),
     );
