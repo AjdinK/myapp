@@ -39,6 +39,7 @@ dependencies:
   http: ^1.0.0
   json_serializable: ^6.7.0
   intl: ^0.18.1
+  google_fonts: ^5.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/products/product_list_screen.dart';
+import 'package:myapp/theme/theme.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
@@ -25,12 +26,8 @@ void main() => runApp(
             }
             return null;
           },
-          theme: ThemeData(
-            useMaterial3: true,
-            fontFamily: 'firaMono',
-            colorSchemeSeed: Colors.amberAccent,
-          ),
-          darkTheme: ThemeData.dark(),
+          theme: TAppTheme.lightTheme,
+          darkTheme: TAppTheme.darkThme,
           themeMode: ThemeMode.system,
         ),
       ),
@@ -48,7 +45,15 @@ class HomePage extends StatelessWidget {
     _userProvider = Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('test_app')),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.dark_mode_outlined),
+          )
+        ],
+        title: const Center(
+          child: Text('test_app'),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
