@@ -16,6 +16,7 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
   List<Product> data = [];
+  TextEditingController searchController = new TextEditingController();
 
   @override
   void initState() {
@@ -86,30 +87,50 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   Widget _buildProductSearch() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-      child: TextField(
-        onSubmitted: (value) async {
-          var tempData = await _productProvider?.get({'naziv': value});
-          setState(() {
-            data = tempData!;
-          });
-        },
-        onChanged: (value) async {
-          var tempData = await _productProvider?.get({'naziv': value});
-          setState(() {
-            data = tempData!;
-          });
-        },
-        decoration: InputDecoration(
-          hintText: "Search",
-          prefixIcon: Icon(Icons.search_outlined),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.grey),
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: TextField(
+              controller: searchController,
+              onSubmitted: (value) async {
+                var tempData = await _productProvider?.get({'naziv': value});
+                setState(() {
+                  data = tempData!;
+                });
+              },
+              onChanged: (value) async {
+                var tempData = await _productProvider?.get({'naziv': value});
+                setState(() {
+                  data = tempData!;
+                });
+              },
+              decoration: InputDecoration(
+                hintText: "Search",
+                prefixIcon: Icon(Icons.search_outlined),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+              ),
+            ),
           ),
         ),
-      ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: IconButton(
+            onPressed: () async {
+              var tempData =
+                  await _productProvider?.get({'naziv': searchController.text});
+              setState(() {
+                data = tempData!;
+              });
+            },
+            icon: Icon(Icons.filter_list_outlined),
+          ),
+        )
+      ],
     );
   }
 
