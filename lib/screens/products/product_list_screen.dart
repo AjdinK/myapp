@@ -26,7 +26,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   }
 
   Future loadData() async {
-    var tmpData = await _productProvider?.get();
+    var tmpData = await _productProvider?.get(null);
     setState(
       () {
         data = tmpData! as List<Product>;
@@ -89,6 +89,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: TextField(
+        onSubmitted: (value) async {
+          var tempData = await _productProvider?.get({'naziv': value});
+          setState(() {
+            data = tempData!;
+          });
+        },
+        onChanged: (value) async {
+          var tempData = await _productProvider?.get({'naziv': value});
+          setState(() {
+            data = tempData!;
+          });
+        },
         decoration: InputDecoration(
           hintText: "Search",
           prefixIcon: Icon(Icons.search_outlined),
