@@ -1,6 +1,5 @@
-import 'package:eprodajamobile/providers/base_provider.dart';
-
 import '../model/order.dart';
+import 'base_provider.dart';
 
 class OrderProvider extends BaseProvider<Order> {
   OrderProvider() : super("Narudzbe");

@@ -4,8 +4,11 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
+import '../../../model/cart.dart';
 import '../../../providers/cart_provider.dart';
 import '../../../providers/order_provider.dart';
+import '../../../utils/util.dart';
+import '../../../widgets/master_screen.dart';
 
 class CartScreen extends StatefulWidget {
   static const String routeName = "/cart";
