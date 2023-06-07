@@ -3,6 +3,10 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
+import '../screens/products/cart/cart_screen.dart';
+import '../screens/products/product_list_screen.dart';
+
 class eProdajaDrawer extends StatelessWidget {
   eProdajaDrawer({Key? key}) : super(key: key);
   CartProvider? _cartProvider;
