@@ -53,14 +53,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   height: 10,
                 ),
                 Container(
-                  height: 150,
+                  height: 200,
                   child: GridView(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1,
                             childAspectRatio: 3 / 4,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 30),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 0),
                     scrollDirection: Axis.horizontal,
                     children: _buildProductCardList(),
                   ),
@@ -117,19 +117,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
             ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: IconButton(
-            onPressed: () async {
-              var tempData =
-                  await _productProvider?.get({'naziv': searchController.text});
-              setState(() {
-                data = tempData!;
-              });
-            },
-            icon: Icon(Icons.filter_list_outlined),
-          ),
-        )
+        // Container(
+        //   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        //   child: IconButton(
+        //     onPressed: () async {
+        //       var tempData =
+        //           await _productProvider?.get({'naziv': searchController.text});
+        //       setState(() {
+        //         data = tempData!;
+        //       });
+        //     },
+        //     icon: const Icon(Icons.filter_list_outlined),
+        //   ),
+        // )
       ],
     );
   }
@@ -171,6 +171,14 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       color: Colors.blueAccent),
                   overflow: TextOverflow.ellipsis,
                 ),
+                addVerticalSpace(2),
+                TextButton(
+                  onPressed: () {},
+                  child: const Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Colors.blueAccent,
+                  ),
+                )
               ],
             ),
           ),
