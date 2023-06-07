@@ -5,6 +5,8 @@ import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/eprodaja_drawer.dart';
+
 class ProductListScreen extends StatefulWidget {
   static const String routeName = '/products';
   const ProductListScreen({super.key});
@@ -38,20 +40,16 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
+      drawer: eProdajaDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
             // color: Colors.redAccent,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 30,
-                ),
                 _buildHeader(),
                 _buildProductSearch(),
-                const SizedBox(
-                  height: 10,
-                ),
                 Container(
                   height: 200,
                   child: GridView(
