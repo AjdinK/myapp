@@ -18,7 +18,7 @@ class eProdajaDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: Text('Home'),
+            title: const Text('Home page'),
             onTap: () {
               Navigator.popAndPushNamed(context, ProductListScreen.routeName);
             },
