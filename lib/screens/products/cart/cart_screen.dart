@@ -42,7 +42,9 @@ class _CartScreenState extends State<CartScreen> {
     return MasterScreenWidget(
       child: Column(
         children: [
-          Expanded(child: _buildProductCardList()),
+          Expanded(
+            child: _buildProductCardList(),
+          ),
           _buildBuyButton(),
         ],
       ),
