@@ -7,15 +7,15 @@ class ProductDetailsScreen extends StatefulWidget {
   ProductDetailsScreen(this.id, {Key? key}) : super(key: key);
 
   @override
-  State<ProductDetailsScreen> createState() => _ProductDetailsScreen();
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
 }
 
-class _ProductDetailsScreen extends State<ProductDetailsScreen> {
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      child: const Center(
-        child: Text("this is widget id"),
+      child: Center(
+        child: Text("Porduct id -> ${widget.id}"),
       ),
     );
   }

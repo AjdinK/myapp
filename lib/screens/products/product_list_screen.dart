@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp/model/product.dart';
 import 'package:myapp/providers/product_provider.dart';
+import 'package:myapp/screens/products/products/product_details_screen.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
@@ -177,10 +178,16 @@ class _ProductListScreenState extends State<ProductListScreen> {
             height: 200,
             child: Column(
               children: [
-                Container(
-                  height: 100,
-                  width: 100,
-                  child: imageFromBase64String(x.slika!),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context,
+                        '${ProductDetailsScreen.routeName}/${x.proizvodId}');
+                  },
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    child: imageFromBase64String(x.slika!),
+                  ),
                 ),
                 const SizedBox(
                   height: 8,
