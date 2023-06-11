@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/providers/cart_provider.dart';
+import 'package:myapp/providers/order_provider.dart';
 import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
+import 'package:myapp/screens/products/cart/cart_screen.dart';
 import 'package:myapp/screens/products/product_list_screen.dart';
 import 'package:myapp/theme/theme.dart';
 import 'package:myapp/utils/util.dart';
@@ -15,6 +18,12 @@ void main() => runApp(
           ChangeNotifierProvider(
             create: (_) => UserProvider(),
           ),
+          ChangeNotifierProvider(
+            create: (_) => CartProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => OrderProvider(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -23,8 +32,9 @@ void main() => runApp(
             if (settings.name == ProductListScreen.routeName) {
               return MaterialPageRoute(
                   builder: ((context) => const ProductListScreen()));
+            } else if (settings.name == CartScreen.routeName) {
+              return MaterialPageRoute(builder: ((context) => CartScreen()));
             }
-            return null;
           },
           theme: TAppTheme.lightTheme,
           darkTheme: TAppTheme.darkThme,

@@ -1,3 +1,1 @@
-class Order {
-  
-}
+class Order {}

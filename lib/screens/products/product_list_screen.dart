@@ -5,7 +5,9 @@ import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/cart_provider.dart';
 import '../../widgets/eprodaja_drawer.dart';
+import '../../widgets/master_screen.dart';
 
 class ProductListScreen extends StatefulWidget {
   static const String routeName = '/products';
@@ -17,6 +19,8 @@ class ProductListScreen extends StatefulWidget {
 
 class _ProductListScreenState extends State<ProductListScreen> {
   ProductProvider? _productProvider = null;
+  CartProvider? _cartProvider = null;
+
   List<Product> data = [];
   TextEditingController searchController = new TextEditingController();
 
@@ -25,6 +29,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
     // TODO: implement initState
     super.initState();
     _productProvider = context.read<ProductProvider>();
+    _cartProvider = context.read<CartProvider>();
+
     loadData();
   }
 
@@ -39,37 +45,65 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      drawer: eProdajaDrawer(),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            // color: Colors.redAccent,
-            child: Column(
-              children: [
-                _buildHeader(),
-                _buildProductSearch(),
-                Container(
-                  height: 200,
-                  child: GridView(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 1,
-                            childAspectRatio: 3 / 4,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 0),
-                    scrollDirection: Axis.horizontal,
-                    children: _buildProductCardList(),
-                  ),
+    return MasterScreenWidget(
+      child: SingleChildScrollView(
+        child: Container(
+          // color: Colors.redAccent,
+          child: Column(
+            children: [
+              _buildHeader(),
+              _buildProductSearch(),
+              Container(
+                height: 200,
+                child: GridView(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 1,
+                      childAspectRatio: 3 / 4,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 0),
+                  scrollDirection: Axis.horizontal,
+                  children: _buildProductCardList(),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
+
+  //  Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     appBar: AppBar(),
+  //     drawer: eProdajaDrawer(),
+  //     body: SafeArea(
+  //       child: SingleChildScrollView(
+  //         child: Container(
+  //           // color: Colors.redAccent,
+  //           child: Column(
+  //             children: [
+  //               _buildHeader(),
+  //               _buildProductSearch(),
+  //               Container(
+  //                 height: 200,
+  //                 child: GridView(
+  //                   gridDelegate:
+  //                       const SliverGridDelegateWithFixedCrossAxisCount(
+  //                           crossAxisCount: 1,
+  //                           childAspectRatio: 3 / 4,
+  //                           crossAxisSpacing: 10,
+  //                           mainAxisSpacing: 0),
+  //                   scrollDirection: Axis.horizontal,
+  //                   children: _buildProductCardList(),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildHeader() {
     return Container(
@@ -171,7 +205,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 ),
                 addVerticalSpace(2),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    _cartProvider?.addToCart(x);
+                  },
                   child: const Icon(
                     Icons.shopping_cart_outlined,
                     color: Colors.blueAccent,
