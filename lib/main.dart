@@ -33,8 +33,11 @@ void main() => runApp(
               return MaterialPageRoute(
                   builder: ((context) => const ProductListScreen()));
             } else if (settings.name == CartScreen.routeName) {
-              return MaterialPageRoute(builder: ((context) => CartScreen()));
+              return MaterialPageRoute(
+                builder: ((context) => const CartScreen()),
+              );
             }
+            return null;
           },
           theme: TAppTheme.lightTheme,
           darkTheme: TAppTheme.darkThme,
@@ -46,8 +49,8 @@ void main() => runApp(
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  TextEditingController _usernameController = new TextEditingController();
-  TextEditingController _passwordController = new TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   late UserProvider _userProvider;
 
   @override
@@ -58,7 +61,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.dark_mode_outlined),
+            icon: const Icon(Icons.dark_mode_outlined),
           )
         ],
         title: const Center(
