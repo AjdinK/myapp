@@ -5,6 +5,7 @@ import 'package:myapp/providers/product_provider.dart';
 import 'package:myapp/providers/user_provider.dart';
 import 'package:myapp/screens/products/cart/cart_screen.dart';
 import 'package:myapp/screens/products/product_list_screen.dart';
+import 'package:myapp/screens/products/products/product_details_screen.dart';
 import 'package:myapp/theme/theme.dart';
 import 'package:myapp/utils/util.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +38,16 @@ void main() => runApp(
                 builder: ((context) => const CartScreen()),
               );
             }
+            var uri = Uri.parse(settings.name!);
+            if (uri.pathSegments.length == 2 &&
+                '/${uri.pathSegments.first}' ==
+                    ProductDetailsScreen.routeName) {
+              var id = uri.pathSegments[1];
+              return MaterialPageRoute(
+                builder: ((context) => ProductDetailsScreen(id)),
+              );
+            }
+
             return null;
           },
           theme: TAppTheme.lightTheme,
